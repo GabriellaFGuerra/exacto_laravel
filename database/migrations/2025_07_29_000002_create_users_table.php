@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('neighborhood', 255)->nullable();
             $table->unsignedBigInteger('municipality_id')->nullable();
             $table->string('zip_code', 10)->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->string('cnpj', 20)->unique()->nullable();
+            $table->string('cpf', 20)->unique()->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->string('photo', 255)->nullable();
             $table->tinyInteger('deleted')->default(0);
