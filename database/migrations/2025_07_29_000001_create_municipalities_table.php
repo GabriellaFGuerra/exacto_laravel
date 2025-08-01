@@ -12,10 +12,10 @@ class CreateMunicipalitiesTable extends Migration
             $table->id('municipality_id');
             $table->string('name', 200);
             $table->unsignedBigInteger('uf_id');
-            $table->string('zip_code', 15)->nullable();
             $table->timestamps();
 
             $table->foreign('uf_id')->references('uf_id')->on('federative_units')->onDelete('cascade');
+            $table->unique(['name', 'uf_id']); // Evita cidades duplicadas no mesmo estado
         });
     }
 

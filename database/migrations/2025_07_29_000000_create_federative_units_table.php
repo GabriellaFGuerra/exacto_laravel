@@ -11,8 +11,7 @@ class CreateFederativeUnitsTable extends Migration
         Schema::create('federative_units', function (Blueprint $table) {
             $table->id('uf_id');
             $table->string('name', 150);
-            $table->string('abbreviation', 2);
-            $table->integer('ibge_code')->nullable();
+            $table->string('abbreviation', 2)->unique();
             $table->timestamps();
         });
     }

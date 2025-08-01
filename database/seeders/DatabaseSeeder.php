@@ -12,6 +12,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
+        $this->call([
+            FederativeUnitsSeeder::class,
+            MunicipalitiesSeeder::class,
+            DataMigrationSeeder::class,
+        ]);
     }
 }
