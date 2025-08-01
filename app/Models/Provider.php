@@ -14,6 +14,8 @@ class Provider extends Model
         'email',
         'address',
         'phone',
+        'phone_2',
+        'number',
         'cnpj',
         'municipality_id',
         'complement',
