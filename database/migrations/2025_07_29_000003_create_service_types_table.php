@@ -9,7 +9,7 @@ class CreateServiceTypesTable extends Migration
     public function up()
     {
         Schema::create('service_types', function (Blueprint $table) {
-            $table->id('service_type_id');
+            $table->id();
             $table->string('name', 255);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

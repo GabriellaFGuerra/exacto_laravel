@@ -9,7 +9,7 @@ class CreateMailbagItemsTable extends Migration
     public function up()
     {
         Schema::create('mailbag_items', function (Blueprint $table) {
-            $table->id('mailbag_item_id');
+            $table->id();
             $table->unsignedBigInteger('mailbag_id')->nullable();
             $table->string('provider', 200)->nullable();
             $table->string('document_type', 200)->nullable();
@@ -20,7 +20,7 @@ class CreateMailbagItemsTable extends Migration
             $table->dateTime('close_date')->nullable();
             $table->string('observation', 255)->nullable();
 
-            $table->foreign('mailbag_id')->references('mailbag_id')->on('mailbags')->onDelete('set null');
+            $table->foreign('mailbag_id')->references('id')->on('mailbags')->onDelete('set null');
         });
     }
 

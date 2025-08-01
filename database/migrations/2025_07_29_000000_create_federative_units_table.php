@@ -9,10 +9,9 @@ class CreateFederativeUnitsTable extends Migration
     public function up()
     {
         Schema::create('federative_units', function (Blueprint $table) {
-            $table->id('uf_id');
+            $table->id();
             $table->string('name', 150);
             $table->string('abbreviation', 2)->unique();
-            $table->timestamps();
         });
     }
 

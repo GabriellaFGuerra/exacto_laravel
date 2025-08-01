@@ -9,16 +9,16 @@ class CreateBudgetProvidersTable extends Migration
     public function up()
     {
         Schema::create('budget_providers', function (Blueprint $table) {
-            $table->id('budget_provider_id');
+            $table->id();
             $table->unsignedBigInteger('budget_id');
             $table->unsignedBigInteger('provider_id');
             $table->decimal('value', 10, 2)->nullable();
             $table->string('observation', 255)->nullable();
             $table->string('attachment', 255)->nullable();
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
 
-            $table->foreign('budget_id')->references('budget_id')->on('budgets')->onDelete('cascade');
-            $table->foreign('provider_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
+            $table->foreign('provider_id')->references('id')->on('providers')->onDelete('cascade');
         });
     }
 

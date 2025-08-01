@@ -17,7 +17,7 @@ class ProviderService extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
+        'provider_id',
         'service_type_id',
         'price',
         'description',
@@ -27,9 +27,9 @@ class ProviderService extends Model
     /**
      * Get the user that owns the provider service.
      */
-    public function user(): BelongsTo
+    public function provider(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Provider::class);
     }
 
     /**

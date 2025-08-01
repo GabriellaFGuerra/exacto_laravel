@@ -16,8 +16,6 @@ class FederativeUnitsSeeder extends Seeder
             $estados[] = [
                 'name' => $estado['nome'],
                 'abbreviation' => $estado['sigla'],
-                'created_at' => now(),
-                'updated_at' => now(),
             ];
         }
         DB::table('federative_units')->insert($estados);

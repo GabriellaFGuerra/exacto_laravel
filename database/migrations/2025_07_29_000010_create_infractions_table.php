@@ -9,8 +9,8 @@ class CreateInfractionsTable extends Migration
     public function up()
     {
         Schema::create('infractions', function (Blueprint $table) {
-            $table->id('infraction_id');
-            $table->unsignedBigInteger('client_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('customer_id')->nullable();
             $table->string('type', 255)->nullable();
             $table->string('year', 4)->nullable();
             $table->string('city', 255)->nullable();
@@ -26,7 +26,7 @@ class CreateInfractionsTable extends Migration
             $table->longText('notification_description')->nullable();
             $table->string('receipt', 255)->nullable();
 
-            $table->foreign('client_id')->references('user_id')->on('users')->onDelete('set null');
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

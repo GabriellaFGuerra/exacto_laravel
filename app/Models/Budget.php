@@ -17,7 +17,7 @@ class Budget extends Model
      * @var string
      */
     protected $primaryKey = 'budget_id';
-    
+
     /**
      * Indicates if the model should be timestamped.
      *
@@ -31,7 +31,7 @@ class Budget extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'client_id',
+        'customer_id',
         'service_type_id',
         'custom_service_type',
         'spreadsheet',
@@ -60,7 +60,7 @@ class Budget extends Model
      */
     public function client(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'client_id', 'user_id');
+        return $this->belongsTo(User::class, 'customer_id', 'user_id');
     }
 
     /**

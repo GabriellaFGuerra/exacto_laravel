@@ -16,7 +16,7 @@ class Statement extends Model
      * @var string
      */
     protected $primaryKey = 'statement_id';
-    
+
     /**
      * Indicates if the model should be timestamped.
      *
@@ -30,7 +30,7 @@ class Statement extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'client_id',
+        'customer_id',
         'reference',
         'send_date',
         'sent_by',
@@ -53,6 +53,6 @@ class Statement extends Model
      */
     public function client(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'client_id', 'user_id');
+        return $this->belongsTo(User::class, 'customer_id', 'user_id');
     }
 }

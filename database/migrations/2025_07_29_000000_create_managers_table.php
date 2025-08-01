@@ -9,9 +9,9 @@ class CreateManagersTable extends Migration
     public function up()
     {
         Schema::create('managers', function (Blueprint $table) {
-            $table->id('manager_id');
+            $table->id();
             $table->string('name', 255);
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

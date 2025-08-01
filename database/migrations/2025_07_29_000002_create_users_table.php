@@ -9,12 +9,12 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id();
             $table->string('name', 255);
             $table->string('email', 255)->unique();
             $table->string('login', 60)->unique()->nullable();
             $table->string('password', 255);
-            $table->enum('user_type', ['admin', 'client', 'provider']);
+            $table->enum('user_type', ['admin', 'customer']);
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('notification')->default(0);
             $table->string('address', 255)->nullable();
@@ -26,11 +26,12 @@ class CreateUsersTable extends Migration
             $table->string('phone', 20)->nullable();
             $table->string('cnpj', 20)->unique()->nullable();
             $table->string('cpf', 20)->unique()->nullable();
-            $table->timestamp('created_at')->useCurrent();
             $table->string('photo', 255)->nullable();
-            $table->tinyInteger('deleted')->default(0);
+            $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('municipality_id')->references('municipality_id')->on('municipalities')->onDelete('set null');
+            $table->foreign('municipality_id')->references('id')->on('municipalities')->onDelete('set null');
+
         });
     }
 

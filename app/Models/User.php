@@ -81,7 +81,7 @@ class User extends Authenticatable
      */
     public function clientBudgets(): HasMany
     {
-        return $this->hasMany(Budget::class, 'client_id', 'user_id');
+        return $this->hasMany(Budget::class, 'customer_id', 'user_id');
     }
 
     /**
@@ -105,7 +105,7 @@ class User extends Authenticatable
      */
     public function documents(): HasMany
     {
-        return $this->hasMany(Document::class, 'client_id', 'user_id');
+        return $this->hasMany(Document::class, 'customer_id', 'user_id');
     }
 
     /**
@@ -113,7 +113,7 @@ class User extends Authenticatable
      */
     public function infractions(): HasMany
     {
-        return $this->hasMany(Infraction::class, 'client_id', 'user_id');
+        return $this->hasMany(Infraction::class, 'customer_id', 'user_id');
     }
 
     /**
@@ -121,7 +121,7 @@ class User extends Authenticatable
      */
     public function mailbags(): HasMany
     {
-        return $this->hasMany(Mailbag::class, 'client_id', 'user_id');
+        return $this->hasMany(Mailbag::class, 'customer_id', 'user_id');
     }
 
     /**
@@ -129,7 +129,7 @@ class User extends Authenticatable
      */
     public function statements(): HasMany
     {
-        return $this->hasMany(Statement::class, 'client_id', 'user_id');
+        return $this->hasMany(Statement::class, 'customer_id', 'user_id');
     }
 
     /**

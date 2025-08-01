@@ -17,7 +17,7 @@ class Mailbag extends Model
      * @var string
      */
     protected $primaryKey = 'mailbag_id';
-    
+
     /**
      * Indicates if the model should be timestamped.
      *
@@ -31,7 +31,7 @@ class Mailbag extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'client_id',
+        'customer_id',
         'seal',
         'observation',
         'electronic_pg',
@@ -52,7 +52,7 @@ class Mailbag extends Model
      */
     public function client(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'client_id', 'user_id');
+        return $this->belongsTo(User::class, 'customer_id', 'user_id');
     }
 
     /**

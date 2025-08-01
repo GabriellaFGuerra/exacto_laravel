@@ -15,7 +15,7 @@ class DataMigrationSeeder extends Seeder
             'cadastro_clientes' => [
                 'new_table' => 'users',
                 'columns' => [
-                    'cli_id' => 'user_id',
+                    'cli_id' => 'id',
                     'cli_nome_razao' => 'name',
                     'cli_email' => 'email',
                     'cli_senha' => 'password',
@@ -23,31 +23,43 @@ class DataMigrationSeeder extends Seeder
                 ],
                 'defaults' => [
                     'status' => 1,
-                    'user_type' => 'client',
+                    'user_type' => 'customer',
                     'notification' => 0,
-                    'deleted' => 0,
+                    'deleted_at' => 0,
                 ],
                 'transformers' => [],
             ],
             'cadastro_fornecedores' => [
-                'new_table' => 'users',
+                'new_table' => 'providers',
                 'columns' => [
-                    'for_id' => 'user_id',
+                    'for_id' => 'id',
                     'for_nome_razao' => 'name',
                     'for_email' => 'email',
-                    'for_status' => 'status',
+                    'for_cnpj' => 'cnpj',
+                    'for_telefone' => 'phone',
+                    'for_telefone2' => 'phone_2',
+                    'for_endereco' => 'address',
+                    'for_cep' => 'zip_code',
+                    'for_municipio' => 'municipality_id',
+                    'for_bairro' => 'neighborhood',
+                    'for_numero' => 'number',
+                    'for_comp' => 'complement',
+                    'for_data_cadastro' => 'created_at',
                 ],
                 'defaults' => [
-                    'user_type' => 'provider',
-                    'notification' => 0,
-                    'deleted' => 0,
+                    'deleted_at' => null,
                 ],
-                'transformers' => [],
+                'transformers' => [
+                    'deleted_at' => function ($row) {
+                        return $row->for_status == 1 ? Carbon::now() : null;
+                    }
+
+                ],
             ],
             'cadastro_tipos_servicos' => [
                 'new_table' => 'service_types',
                 'columns' => [
-                    'tps_id' => 'service_type_id',
+                    'tps_id' => 'id',
                     'tps_nome' => 'name',
                     'tps_status' => 'status',
                 ],
@@ -66,7 +78,7 @@ class DataMigrationSeeder extends Seeder
             'cadastro_tipos_docs' => [
                 'new_table' => 'document_types',
                 'columns' => [
-                    'tpd_id' => 'document_type_id',
+                    'tpd_id' => 'id',
                     'tpd_nome' => 'name',
                     'tpd_status' => 'status',
                 ],
@@ -76,8 +88,8 @@ class DataMigrationSeeder extends Seeder
             'documento_gerenciar' => [
                 'new_table' => 'documents',
                 'columns' => [
-                    'doc_id' => 'document_id',
-                    'doc_cliente' => 'client_id',
+                    'doc_id' => 'id',
+                    'doc_cliente' => 'customer_id',
                     'doc_orcamento' => 'budget_id',
                     'doc_tipo' => 'document_type_id',
                     'doc_anexo' => 'attachment',
@@ -93,8 +105,8 @@ class DataMigrationSeeder extends Seeder
             'orcamento_gerenciar' => [
                 'new_table' => 'budgets',
                 'columns' => [
-                    'orc_id' => 'budget_id',
-                    'orc_cliente' => 'client_id',
+                    'orc_id' => 'id',
+                    'orc_cliente' => 'customer_id',
                     'orc_tipo_servico' => 'service_type_id',
                     'orc_planilha' => 'spreadsheet',
                     'orc_andamento' => 'progress',
@@ -113,7 +125,7 @@ class DataMigrationSeeder extends Seeder
             'orcamento_fornecedor' => [
                 'new_table' => 'budget_providers',
                 'columns' => [
-                    'orf_id' => 'budget_provider_id',
+                    'orf_id' => 'id',
                     'orf_orcamento' => 'budget_id',
                     'orf_fornecedor' => 'provider_id',
                     'orf_valor' => 'value',
@@ -127,8 +139,8 @@ class DataMigrationSeeder extends Seeder
             'infracoes_gerenciar' => [
                 'new_table' => 'infractions',
                 'columns' => [
-                    'inf_id' => 'infraction_id',
-                    'inf_cliente' => 'client_id',
+                    'inf_id' => 'id',
+                    'inf_cliente' => 'customer_id',
                     'inf_tipo' => 'type',
                     'inf_ano' => 'year',
                     'inf_cidade' => 'city',
@@ -150,7 +162,7 @@ class DataMigrationSeeder extends Seeder
             'recurso_gerenciar' => [
                 'new_table' => 'appeals',
                 'columns' => [
-                    'rec_id' => 'appeal_id',
+                    'rec_id' => 'id',
                     'rec_infracao' => 'infraction_id',
                     'rec_assunto' => 'subject',
                     'rec_descricao' => 'description',
@@ -163,8 +175,8 @@ class DataMigrationSeeder extends Seeder
             'malote_gerenciar' => [
                 'new_table' => 'mailbags',
                 'columns' => [
-                    'mal_id' => 'mailbag_id',
-                    'mal_cliente' => 'client_id',
+                    'mal_id' => 'id',
+                    'mal_cliente' => 'customer_id',
                     'mal_lacre' => 'seal',
                     'mal_observacoes' => 'observation',
                     'mal_data_cadastro' => 'created_at',
@@ -177,7 +189,7 @@ class DataMigrationSeeder extends Seeder
             'malote_itens' => [
                 'new_table' => 'mailbag_items',
                 'columns' => [
-                    'mai_id' => 'mailbag_item_id',
+                    'mai_id' => 'id',
                     'mai_malote' => 'mailbag_id',
                     'mai_fornecedor' => 'provider',
                     'mai_tipo_documento' => 'document_type',
@@ -194,8 +206,8 @@ class DataMigrationSeeder extends Seeder
             'prestacao_gerenciar' => [
                 'new_table' => 'statements',
                 'columns' => [
-                    'pre_id' => 'statement_id',
-                    'pre_cliente' => 'client_id',
+                    'pre_id' => 'id',
+                    'pre_cliente' => 'customer_id',
                     'pre_referencia' => 'reference',
                     'pre_data_envio' => 'send_date',
                     'pre_enviado_por' => 'sent_by',
@@ -209,7 +221,7 @@ class DataMigrationSeeder extends Seeder
             'cadastro_gerentes' => [
                 'new_table' => 'managers',
                 'columns' => [
-                    'ger_id' => 'manager_id',
+                    'ger_id' => 'id',
                     'ger_nome' => 'name',
                     'ger_data_cadastro' => 'created_at',
                 ],
@@ -222,7 +234,7 @@ class DataMigrationSeeder extends Seeder
 
         foreach ($mappings as $oldTable => $map) {
             $rows = $old->table($oldTable)->get();
-            $this->command->info("Migrating {\$oldTable} ({\$rows->count()} rows)");
+            $this->command->info("Migrating {$oldTable} ({$rows->count()} rows)");
 
             foreach ($rows as $row) {
                 $new = [];
@@ -235,44 +247,14 @@ class DataMigrationSeeder extends Seeder
                     $new[$col] = $val;
                 }
 
+                // Apply transformers
+                if (isset($map['transformers'])) {
+                    foreach ($map['transformers'] as $col => $transformer) {
+                        $new[$col] = $transformer($row);
+                    }
+                }
+
                 DB::table($map['new_table'])->insertOrIgnore($new);
-            }
-        }
-
-        $cutoffCreated = Carbon::parse('2020-01-01');
-        $cutoffExpiration = Carbon::now()->startOfDay();
-
-        $tablesWithCreatedAt = [
-            'documents',
-            'budgets',
-            'budget_providers',
-            'infractions',
-            'mailbags',
-            'mailbag_items',
-            'statements'
-        ];
-
-        foreach ($tablesWithCreatedAt as $table) {
-            if (Schema::hasColumn($table, 'created_at')) {
-                DB::table($table)
-                    ->where('created_at', '<', $cutoffCreated)
-                    ->delete();
-                $this->command->info("Removed entries created before 2020 from {\$table}");
-            }
-        }
-
-        $tablesWithExpiration = [
-            'documents',
-            'budget_providers',
-            'mailbag_items'
-        ];
-
-        foreach ($tablesWithExpiration as $table) {
-            if (Schema::hasColumn($table, 'expiration_date')) {
-                DB::table($table)
-                    ->where('expiration_date', '<', $cutoffExpiration)
-                    ->delete();
-                $this->command->info("Removed expired entries from {\$table}");
             }
         }
 

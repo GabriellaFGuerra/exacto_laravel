@@ -16,7 +16,7 @@ class Document extends Model
      * @var string
      */
     protected $primaryKey = 'document_id';
-    
+
     /**
      * Indicates if the model should be timestamped.
      *
@@ -30,7 +30,7 @@ class Document extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'client_id',
+        'customer_id',
         'budget_id',
         'document_type_id',
         'attachment',
@@ -57,7 +57,7 @@ class Document extends Model
      */
     public function client(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'client_id', 'user_id');
+        return $this->belongsTo(User::class, 'customer_id', 'user_id');
     }
 
     /**
