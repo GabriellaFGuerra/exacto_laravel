@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProviderService extends Model
 {
@@ -25,7 +24,7 @@ class ProviderService extends Model
     ];
 
     /**
-     * Get the user that owns the provider service.
+     * Get the provider that owns the provider service.
      */
     public function provider(): BelongsTo
     {
@@ -38,13 +37,5 @@ class ProviderService extends Model
     public function serviceType(): BelongsTo
     {
         return $this->belongsTo(ServiceType::class);
-    }
-
-    /**
-     * Get the budget providers for the provider service.
-     */
-    public function budgetProviders(): HasMany
-    {
-        return $this->hasMany(BudgetProvider::class);
     }
 }

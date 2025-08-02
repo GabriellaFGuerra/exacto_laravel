@@ -10,14 +10,6 @@ class BudgetProvider extends Model
 {
     use HasFactory;
 
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -38,7 +30,6 @@ class BudgetProvider extends Model
      */
     protected $casts = [
         'value' => 'decimal:2',
-        'created_at' => 'datetime',
     ];
 
     /**
@@ -46,7 +37,7 @@ class BudgetProvider extends Model
      */
     public function budget(): BelongsTo
     {
-        return $this->belongsTo(Budget::class, 'budget_id');
+        return $this->belongsTo(Budget::class);
     }
 
     /**
@@ -54,6 +45,6 @@ class BudgetProvider extends Model
      */
     public function provider(): BelongsTo
     {
-        return $this->belongsTo(Provider::class, 'provider_id');
+        return $this->belongsTo(Provider::class);
     }
 }

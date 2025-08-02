@@ -41,4 +41,22 @@ class Provider extends Model
     {
         return $this->hasMany(ProviderService::class);
     }
+
+    /**
+     * Get the budget providers for this provider.
+     */
+    public function budgetProviders(): HasMany
+    {
+        return $this->hasMany(BudgetProvider::class);
+    }
+
+    /**
+     * Get all budgets associated with this provider.
+     */
+    public function budgets()
+    {
+        return $this->belongsToMany(Budget::class, 'budget_providers', 'provider_id', 'budget_id')
+            ->withPivot('value', 'observation', 'attachment')
+            ->withTimestamps();
+    }
 }
