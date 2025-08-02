@@ -1,66 +1,235 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema Exacto Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![PHP](https://img.shields.io/badge/PHP-81.8%25-blue)
+![Blade](https://img.shields.io/badge/Blade-18%25-green)
+![JavaScript](https://img.shields.io/badge/JavaScript-0.2%25-yellow)
 
-## About Laravel
+## Sobre o Projeto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+O Sistema Exacto é uma aplicação Laravel desenvolvida para gestão administrativa de condomínios, permitindo controle de orçamentos, documentos, infrações, malotes e diversos outros recursos administrativos. A plataforma facilita o gerenciamento de clientes, prestadores de serviços e processos internos, proporcionando uma interface intuitiva e funcionalidades robustas.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Funcionalidades Principais
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Gestão de Usuários**
+  - Diferentes tipos de usuários (administradores e clientes)
+  - Controle de acesso baseado em permissões
+  - Perfis personalizáveis com informações detalhadas
 
-## Learning Laravel
+- **Gestão de Orçamentos**
+  - Criação e acompanhamento de orçamentos
+  - Vinculação com tipos de serviços
+  - Atribuição de responsáveis e gerentes
+  - Definição de prazos e status
+  - Observações e histórico de progresso
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Gestão de Documentos**
+  - Upload e armazenamento de arquivos
+  - Categorização por tipos
+  - Controle de datas de emissão e validade
+  - Alertas de vencimento
+  - Associação com clientes e orçamentos
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Gestão de Infrações e Recursos**
+  - Registro detalhado de infrações
+  - Controle de recursos administrativos
+  - Acompanhamento de status e resultados
+  - Armazenamento de documentação relacionada
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Gestão de Malotes**
+  - Registro de malotes e itens
+  - Controle de valores
+  - Acompanhamento de status de fechamento
+  - Observações e detalhamentos
 
-## Laravel Sponsors
+- **Gestão de Localidades**
+  - Estrutura hierárquica de unidades federativas
+  - Cadastro completo de municípios
+  - Utilização em endereçamento de clientes e fornecedores
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- **Gestão de Prestadores de Serviços**
+  - Cadastro detalhado de fornecedores
+  - Vinculação com tipos de serviços
+  - Controle de orçamentos por fornecedor
 
-### Premium Partners
+## Requisitos do Sistema
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- PHP >= 8.0
+- Composer
+- MySQL 5.7+ ou PostgreSQL 9.6+
+- Node.js (v14+) e NPM
+- Extensões PHP:
+  - BCMath
+  - Ctype
+  - Fileinfo
+  - JSON
+  - Mbstring
+  - OpenSSL
+  - PDO
+  - Tokenizer
+  - XML
+  - Curl
+  - ZIP
+- Servidor Web (Apache/Nginx)
+- Espaço em disco: mínimo 500MB para instalação básica
 
-## Contributing
+## Instalação
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Preparação do Ambiente
 
-## Code of Conduct
+```bash
+php -v
+composer -V
+mysql --version
+node -v
+npm -v
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Configure seu servidor web para apontar para a pasta `public` do projeto.
 
-## Security Vulnerabilities
+### Instalação do Projeto
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+git clone https://github.com/GabriellaFGuerra/exacto_laravel.git
+cd exacto_laravel
+composer install
+npm install && npm run dev
+cp .env.example .env
+```
 
-## License
+Edite o `.env` com suas configurações:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```dotenv
+APP_NAME="Sistema Exacto"
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=exacto
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Siga os comandos abaixo para configurar o ambiente:
+
+```bash
+php artisan key:generate
+mysql -u root -p -e "CREATE DATABASE exacto CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+php artisan migrate
+php artisan db:seed   # Opcional
+chmod -R 775 storage bootstrap/cache
+php artisan serve
+```
+
+Acesse: [http://localhost:8000](http://localhost:8000)
+
+## Estrutura do Banco de Dados
+
+### Usuários e Permissões
+
+- **Users**
+- **Managers**
+
+### Orçamentos e Serviços
+
+- **Budgets**
+- **ServiceTypes**
+- **ProviderService**
+
+### Documentos
+
+- **Documents**
+- **DocumentTypes**
+
+### Infrações e Recursos
+
+- **Infractions**
+- **Appeals**
+
+### Malotes
+
+- **Mailbags**
+
+### Fornecedores
+
+- **Providers**
+
+## Manutenção
+
+### Backup do Banco de Dados
+
+```bash
+mysqldump -u root -p exacto > backup-exacto-$(date +%Y%m%d).sql
+mysql -u root -p exacto < backup-exacto-20250802.sql
+```
+
+### Atualização
+
+```bash
+git pull origin main
+composer install --no-dev
+npm install && npm run build
+php artisan migrate
+php artisan optimize:clear
+```
+
+### Comandos Úteis
+
+```bash
+php artisan status
+php artisan cache:clear
+composer dump-autoload
+php artisan route:list
+```
+
+## Solução de Problemas
+
+1. **Permissão em pastas**
+
+   ```bash
+   chmod -R 775 storage bootstrap/cache
+   chown -R www-data:www-data storage bootstrap/cache
+   ```
+
+2. **Erro "Class not found"**
+
+   ```bash
+   composer dump-autoload
+   ```
+
+3. **Erro de conexão com banco**
+   - Verifique `.env`
+   - Verifique se o MySQL está ativo
+
+4. **Estilos não carregando**
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Erro em migrações**
+
+   ```bash
+   php artisan migrate:fresh
+   # CUIDADO: apaga os dados existentes
+   ```
+
+## Contribuição
+
+1. Fork o repositório
+2. Crie uma branch: `git checkout -b feature/nome-da-feature`
+3. Commit: `git commit -m 'Adiciona nova feature'`
+4. Push: `git push origin feature/nome-da-feature`
+5. Abra um Pull Request
+
+## Contato
+
+Gabriella Guerra - <gabriellafguerra21@gmail.com>  
+Link do projeto: [https://github.com/GabriellaFGuerra/exacto_laravel](https://github.com/GabriellaFGuerra/exacto_laravel)
+
+---
+
+Desenvolvido em 2025 | Sistema Exacto
