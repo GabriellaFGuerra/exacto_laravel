@@ -16,6 +16,7 @@ class Document extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'title',
         'customer_id',
         'budget_id',
         'document_type_id',

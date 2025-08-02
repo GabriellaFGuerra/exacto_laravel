@@ -13,7 +13,8 @@ class CreateDocumentsTable extends Migration
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('budget_id')->nullable();
             $table->unsignedBigInteger('document_type_id')->nullable();
-            $table->string('attachment', 255)->nullable();
+            $table->string('attachment', 255);
+            $table->string('title', 255);
             $table->date('issue_date')->nullable();
             $table->tinyInteger('periodicity')->nullable();
             $table->date('expiration_date')->nullable();
