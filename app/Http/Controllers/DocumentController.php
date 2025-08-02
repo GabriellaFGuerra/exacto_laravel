@@ -109,7 +109,7 @@ class DocumentController extends Controller
 
             if ($request->hasFile('attachment')) {
                 $file = $request->file('attachment');
-                $titleSnakeCase = \Illuminate\Support\Str::snake($request->input('title'));
+                $titleSnakeCase = Str::snake($request->input('title'));
                 $dateSuffix = now()->format('Ymd_His');
                 $extension = $file->getClientOriginalExtension();
                 $fileName = "{$titleSnakeCase}_{$dateSuffix}.{$extension}";
