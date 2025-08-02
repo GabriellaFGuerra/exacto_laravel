@@ -8,17 +8,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
-    /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'user_id';
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -43,7 +37,6 @@ class User extends Authenticatable
         'cnpj',
         'cpf',
         'photo',
-        'deleted'
     ];
 
     /**
@@ -65,7 +58,7 @@ class User extends Authenticatable
         'password' => 'hashed',
         'status' => 'integer',
         'notification' => 'integer',
-        'deleted' => 'integer'
+        'email_verified_at' => 'datetime',
     ];
 
     /**
@@ -73,15 +66,15 @@ class User extends Authenticatable
      */
     public function municipality(): BelongsTo
     {
-        return $this->belongsTo(Municipality::class, 'municipality_id', 'municipality_id');
+        return $this->belongsTo(Municipality::class);
     }
 
     /**
-     * Get the budgets for the user as a client.
+     * Get the budgets for the user as a customer.
      */
-    public function clientBudgets(): HasMany
+    public function customerBudgets(): HasMany
     {
-        return $this->hasMany(Budget::class, 'customer_id', 'user_id');
+        return $this->hasMany(Budget::class, 'customer_id');
     }
 
     /**
@@ -89,15 +82,7 @@ class User extends Authenticatable
      */
     public function responsibleBudgets(): HasMany
     {
-        return $this->hasMany(Budget::class, 'responsible_user_id', 'user_id');
-    }
-
-    /**
-     * Get the budgets where user is manager.
-     */
-    public function managedBudgets(): HasMany
-    {
-        return $this->hasMany(Budget::class, 'responsible_manager_id', 'user_id');
+        return $this->hasMany(Budget::class, 'responsible_user_id');
     }
 
     /**
@@ -105,7 +90,7 @@ class User extends Authenticatable
      */
     public function documents(): HasMany
     {
-        return $this->hasMany(Document::class, 'customer_id', 'user_id');
+        return $this->hasMany(Document::class, 'customer_id');
     }
 
     /**
@@ -113,7 +98,7 @@ class User extends Authenticatable
      */
     public function infractions(): HasMany
     {
-        return $this->hasMany(Infraction::class, 'customer_id', 'user_id');
+        return $this->hasMany(Infraction::class, 'customer_id');
     }
 
     /**
@@ -121,7 +106,7 @@ class User extends Authenticatable
      */
     public function mailbags(): HasMany
     {
-        return $this->hasMany(Mailbag::class, 'customer_id', 'user_id');
+        return $this->hasMany(Mailbag::class, 'customer_id');
     }
 
     /**
@@ -129,14 +114,6 @@ class User extends Authenticatable
      */
     public function statements(): HasMany
     {
-        return $this->hasMany(Statement::class, 'customer_id', 'user_id');
-    }
-
-    /**
-     * Get the budget providers where user is provider.
-     */
-    public function providerBudgets(): HasMany
-    {
-        return $this->hasMany(BudgetProvider::class, 'provider_id', 'user_id');
+        return $this->hasMany(Statement::class, 'customer_id');
     }
 }

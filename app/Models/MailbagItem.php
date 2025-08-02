@@ -11,13 +11,6 @@ class MailbagItem extends Model
     use HasFactory;
 
     /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'mailbag_item_id';
-    
-    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
@@ -58,6 +51,6 @@ class MailbagItem extends Model
      */
     public function mailbag(): BelongsTo
     {
-        return $this->belongsTo(Mailbag::class, 'mailbag_id', 'mailbag_id');
+        return $this->belongsTo(Mailbag::class, 'mailbag_id');
     }
 }

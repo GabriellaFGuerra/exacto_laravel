@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Provider extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -23,8 +26,19 @@ class Provider extends Model
         'zip_code',
     ];
 
-    public function municipality()
+    /**
+     * Get the municipality that owns the provider.
+     */
+    public function municipality(): BelongsTo
     {
-        return $this->belongsTo(Municipality::class, 'municipality_id', 'municipality_id');
+        return $this->belongsTo(Municipality::class);
+    }
+
+    /**
+     * Get the provider services for this provider.
+     */
+    public function services(): HasMany
+    {
+        return $this->hasMany(ProviderService::class);
     }
 }

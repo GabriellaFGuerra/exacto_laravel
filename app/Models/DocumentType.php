@@ -11,13 +11,6 @@ class DocumentType extends Model
     use HasFactory;
 
     /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'document_type_id';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -32,6 +25,6 @@ class DocumentType extends Model
      */
     public function documents(): HasMany
     {
-        return $this->hasMany(Document::class, 'document_type_id', 'document_type_id');
+        return $this->hasMany(Document::class);
     }
 }

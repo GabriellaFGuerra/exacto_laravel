@@ -11,12 +11,6 @@ class Mailbag extends Model
 {
     use HasFactory;
 
-    /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'mailbag_id';
 
     /**
      * Indicates if the model should be timestamped.
@@ -48,11 +42,11 @@ class Mailbag extends Model
     ];
 
     /**
-     * Get the client that owns the mailbag.
+     * Get the customer that owns the mailbag.
      */
-    public function client(): BelongsTo
+    public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'customer_id', 'user_id');
+        return $this->belongsTo(User::class, 'customer_id');
     }
 
     /**
@@ -60,6 +54,6 @@ class Mailbag extends Model
      */
     public function mailbagItems(): HasMany
     {
-        return $this->hasMany(MailbagItem::class, 'mailbag_id', 'mailbag_id');
+        return $this->hasMany(MailbagItem::class, 'mailbag_id');
     }
 }

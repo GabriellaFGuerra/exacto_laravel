@@ -10,13 +10,7 @@ class BudgetProvider extends Model
 {
     use HasFactory;
 
-    /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'budget_provider_id';
-    
+
     /**
      * Indicates if the model should be timestamped.
      *
@@ -52,7 +46,7 @@ class BudgetProvider extends Model
      */
     public function budget(): BelongsTo
     {
-        return $this->belongsTo(Budget::class, 'budget_id', 'budget_id');
+        return $this->belongsTo(Budget::class, 'budget_id');
     }
 
     /**
@@ -60,6 +54,6 @@ class BudgetProvider extends Model
      */
     public function provider(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'provider_id', 'user_id');
+        return $this->belongsTo(Provider::class, 'provider_id');
     }
 }

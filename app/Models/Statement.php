@@ -11,20 +11,6 @@ class Statement extends Model
     use HasFactory;
 
     /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'statement_id';
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -45,14 +31,13 @@ class Statement extends Model
      */
     protected $casts = [
         'send_date' => 'date',
-        'created_at' => 'datetime',
     ];
 
     /**
-     * Get the client that owns the statement.
+     * Get the customer that owns the statement.
      */
-    public function client(): BelongsTo
+    public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'customer_id', 'user_id');
+        return $this->belongsTo(User::class, 'customer_id');
     }
 }

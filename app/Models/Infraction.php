@@ -12,20 +12,6 @@ class Infraction extends Model
     use HasFactory;
 
     /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'infraction_id';
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -58,11 +44,11 @@ class Infraction extends Model
     ];
 
     /**
-     * Get the client that owns the infraction.
+     * Get the customer that owns the infraction.
      */
-    public function client(): BelongsTo
+    public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'customer_id', 'user_id');
+        return $this->belongsTo(User::class, 'customer_id');
     }
 
     /**
@@ -70,6 +56,6 @@ class Infraction extends Model
      */
     public function appeals(): HasMany
     {
-        return $this->hasMany(Appeal::class, 'infraction_id', 'infraction_id');
+        return $this->hasMany(Appeal::class);
     }
 }

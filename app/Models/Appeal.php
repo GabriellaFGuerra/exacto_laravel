@@ -11,13 +11,6 @@ class Appeal extends Model
     use HasFactory;
 
     /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'appeal_id';
-    
-    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
@@ -42,6 +35,6 @@ class Appeal extends Model
      */
     public function infraction(): BelongsTo
     {
-        return $this->belongsTo(Infraction::class, 'infraction_id', 'infraction_id');
+        return $this->belongsTo(Infraction::class);
     }
 }

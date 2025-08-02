@@ -12,20 +12,6 @@ class Budget extends Model
     use HasFactory;
 
     /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'budget_id';
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -50,17 +36,16 @@ class Budget extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'created_at' => 'datetime',
         'approval_date' => 'date',
         'deadline' => 'date',
     ];
 
     /**
-     * Get the client that owns the budget.
+     * Get the customer that owns the budget.
      */
-    public function client(): BelongsTo
+    public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'customer_id', 'user_id');
+        return $this->belongsTo(User::class, 'customer_id');
     }
 
     /**
@@ -68,31 +53,23 @@ class Budget extends Model
      */
     public function serviceType(): BelongsTo
     {
-        return $this->belongsTo(ServiceType::class, 'service_type_id', 'service_type_id');
+        return $this->belongsTo(ServiceType::class);
     }
 
     /**
-     * Get the responsible user that owns the budget.
+     * Get the responsible user for the budget.
      */
     public function responsibleUser(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'responsible_user_id', 'user_id');
+        return $this->belongsTo(User::class, 'responsible_user_id');
     }
 
     /**
-     * Get the responsible manager that owns the budget.
+     * Get the responsible manager for the budget.
      */
     public function responsibleManager(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'responsible_manager_id', 'user_id');
-    }
-
-    /**
-     * Get the budget providers for the budget.
-     */
-    public function budgetProviders(): HasMany
-    {
-        return $this->hasMany(BudgetProvider::class, 'budget_id', 'budget_id');
+        return $this->belongsTo(Manager::class, 'responsible_manager_id');
     }
 
     /**
@@ -100,6 +77,6 @@ class Budget extends Model
      */
     public function documents(): HasMany
     {
-        return $this->hasMany(Document::class, 'budget_id', 'budget_id');
+        return $this->hasMany(Document::class);
     }
 }

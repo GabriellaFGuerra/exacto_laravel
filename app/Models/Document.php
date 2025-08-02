@@ -11,20 +11,6 @@ class Document extends Model
     use HasFactory;
 
     /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'document_id';
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -49,15 +35,14 @@ class Document extends Model
         'issue_date' => 'date',
         'periodicity' => 'integer',
         'expiration_date' => 'date',
-        'created_at' => 'datetime',
     ];
 
     /**
-     * Get the client that owns the document.
+     * Get the customer that owns the document.
      */
-    public function client(): BelongsTo
+    public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'customer_id', 'user_id');
+        return $this->belongsTo(User::class, 'customer_id');
     }
 
     /**
@@ -65,7 +50,7 @@ class Document extends Model
      */
     public function budget(): BelongsTo
     {
-        return $this->belongsTo(Budget::class, 'budget_id', 'budget_id');
+        return $this->belongsTo(Budget::class);
     }
 
     /**
@@ -73,6 +58,6 @@ class Document extends Model
      */
     public function documentType(): BelongsTo
     {
-        return $this->belongsTo(DocumentType::class, 'document_type_id', 'document_type_id');
+        return $this->belongsTo(DocumentType::class);
     }
 }

@@ -12,13 +12,6 @@ class Municipality extends Model
     use HasFactory;
 
     /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'municipality_id';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -34,7 +27,7 @@ class Municipality extends Model
      */
     public function federativeUnit(): BelongsTo
     {
-        return $this->belongsTo(FederativeUnit::class, 'federative_unit_id', 'federative_unit_id');
+        return $this->belongsTo(FederativeUnit::class, 'federative_unit_id');
     }
 
     /**
@@ -42,6 +35,14 @@ class Municipality extends Model
      */
     public function users(): HasMany
     {
-        return $this->hasMany(User::class, 'municipality_id', 'municipality_id');
+        return $this->hasMany(User::class);
+    }
+
+    /**
+     * Get the providers for the municipality.
+     */
+    public function providers(): HasMany
+    {
+        return $this->hasMany(Provider::class);
     }
 }

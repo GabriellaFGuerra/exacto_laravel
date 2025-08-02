@@ -11,13 +11,6 @@ class ServiceType extends Model
     use HasFactory;
 
     /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'service_type_id';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -41,6 +34,14 @@ class ServiceType extends Model
      */
     public function budgets(): HasMany
     {
-        return $this->hasMany(Budget::class, 'service_type_id', 'service_type_id');
+        return $this->hasMany(Budget::class);
+    }
+
+    /**
+     * Get the provider services for this service type.
+     */
+    public function providerServices(): HasMany
+    {
+        return $this->hasMany(ProviderService::class);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Manager extends Model
 {
@@ -17,17 +17,13 @@ class Manager extends Model
      */
     protected $fillable = [
         'name',
-        'email',
-        'phone',
-        'role',
-        'municipality_id',
     ];
 
     /**
-     * Get the municipality that owns the manager.
+     * Get the budgets managed by this manager.
      */
-    public function municipality(): BelongsTo
+    public function budgets(): HasMany
     {
-        return $this->belongsTo(Municipality::class);
+        return $this->hasMany(Budget::class, 'responsible_manager_id');
     }
 }
