@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
             $table->string('login', 60)->unique()->nullable();
             $table->string('password', 255);
             $table->enum('user_type', ['admin', 'customer']);
-            $table->tinyInteger('status')->default(1);
+            $table->boolean('status')->default(true);
             $table->tinyInteger('notification')->default(0);
             $table->string('address', 255)->nullable();
             $table->string('number', 20)->nullable();

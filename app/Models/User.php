@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,21 +20,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'login',
         'password',
-        'user_type',
+        'user_type', // 'admin' ou 'customer'
         'status',
-        'notification',
-        'address',
-        'number',
-        'complement',
-        'neighborhood',
-        'municipality_id',
-        'zip_code',
         'phone',
-        'cnpj',
-        'cpf',
-        'photo',
+        'address',
     ];
 
     /**
@@ -55,65 +43,62 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'password' => 'hashed',
-        'status' => 'integer',
-        'notification' => 'integer',
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'status' => 'boolean',
     ];
 
     /**
-     * Get the municipality that owns the user.
+     * Check if user is admin
+     *
+     * @return bool
      */
-    public function municipality(): BelongsTo
+    public function isAdmin(): bool
     {
-        return $this->belongsTo(Municipality::class);
+        return $this->user_type == 'admin';
     }
 
     /**
-     * Get the budgets for the user as a customer.
+     * Check if user is customer
+     *
+     * @return bool
      */
-    public function customerBudgets(): HasMany
+    public function isCustomer(): bool
+    {
+        return $this->user_type == 'customer';
+    }
+
+    /**
+     * Check if user is active
+     *
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->status == 1;
+    }
+
+    /**
+     * Get budgets for the customer.
+     */
+    public function customerBudgets()
     {
         return $this->hasMany(Budget::class, 'customer_id');
     }
 
     /**
-     * Get the budgets where user is responsible.
+     * Get budgets assigned to the admin.
      */
-    public function responsibleBudgets(): HasMany
+    public function responsibleBudgets()
     {
         return $this->hasMany(Budget::class, 'responsible_user_id');
     }
 
     /**
-     * Get the documents for the user.
+     * Get infractions for the customer.
      */
-    public function documents(): HasMany
-    {
-        return $this->hasMany(Document::class, 'customer_id');
-    }
-
-    /**
-     * Get the infractions for the user.
-     */
-    public function infractions(): HasMany
+    public function infractions()
     {
         return $this->hasMany(Infraction::class, 'customer_id');
-    }
-
-    /**
-     * Get the mailbags for the user.
-     */
-    public function mailbags(): HasMany
-    {
-        return $this->hasMany(Mailbag::class, 'customer_id');
-    }
-
-    /**
-     * Get the statements for the user.
-     */
-    public function statements(): HasMany
-    {
-        return $this->hasMany(Statement::class, 'customer_id');
     }
 }

@@ -17,7 +17,7 @@ class CreateBudgetsTable extends Migration
             $table->text('progress')->nullable();
             $table->text('observation')->nullable();
             $table->date('approval_date')->nullable();
-            $table->unsignedBigInteger('responsible_user_id');
+            $table->unsignedBigInteger('responsible_user_id')->nullable();
             $table->unsignedBigInteger('responsible_manager_id')->nullable();
             $table->date('deadline')->nullable();
             $table->enum('status', ['open', 'approved', 'rejected', 'pending'])->default('open');

@@ -62,7 +62,7 @@ class AdminController extends Controller
                 'login' => $request->login,
                 'password' => Hash::make($request->password),
                 'user_type' => 'admin',
-                'status' => 1,
+                'status' => true,
                 'notification' => $request->notification,
                 'address' => $request->address,
                 'number' => $request->number,
