@@ -12,8 +12,8 @@ class DocumentTypeController extends Controller
      */
     public function index()
     {
-        $document_types = DocumentType::paginate(10);
-        return view('document_types.index', compact('document_types'));
+        $documentTypes = DocumentType::paginate(10);
+        return view('document-types.index', compact('documentTypes'));
     }
 
     /**
@@ -21,7 +21,7 @@ class DocumentTypeController extends Controller
      */
     public function create()
     {
-        return view('document_types.create');
+        return view('document-types.create');
     }
 
     /**
@@ -32,9 +32,10 @@ class DocumentTypeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'status' => 'required|boolean',
         ]);
         DocumentType::create($request->all());
-        return redirect()->route('document_types.index')->with('success', 'Document Type created successfully.');
+        return redirect()->route('document_types.index')->with('success', 'Tipo de documento criado com sucesso.');
     }
 
     /**
@@ -42,7 +43,7 @@ class DocumentTypeController extends Controller
      */
     public function show(DocumentType $documentType)
     {
-        return view('document_types.show', compact('documentType'));
+        return view('document-types.show', compact('documentType'));
     }
 
     /**
@@ -50,7 +51,7 @@ class DocumentTypeController extends Controller
      */
     public function edit(DocumentType $documentType)
     {
-        return view('document_types.edit', compact('documentType'));
+        return view('document-types.edit', compact('documentType'));
     }
 
     /**
@@ -61,9 +62,10 @@ class DocumentTypeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'status' => 'required|boolean',
         ]);
         $documentType->update($request->all());
-        return redirect()->route('document_types.index')->with('success', 'Document Type updated successfully.');
+        return redirect()->route('document_types.index')->with('success', 'Tipo de documento atualizado com sucesso.');
     }
 
     /**
@@ -72,6 +74,6 @@ class DocumentTypeController extends Controller
     public function destroy(DocumentType $documentType)
     {
         $documentType->delete();
-        return redirect()->route('document_types.index')->with('success', 'Document Type deleted successfully.');
+        return redirect()->route('document_types.index')->with('success', 'Tipo de documento excluído com sucesso.');
     }
 }

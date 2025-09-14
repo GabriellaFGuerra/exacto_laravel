@@ -5,11 +5,11 @@
                 {{ __('Editar Tipo de Documento: ') }}{{ $documentType->name }}
             </h2>
             <div class="flex space-x-2">
-                <a href="{{ route('document-types.show', $documentType) }}"
+                <a href="{{ route('document_types.show', $documentType) }}"
                     class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                     Ver
                 </a>
-                <a href="{{ route('document-types.index') }}"
+                <a href="{{ route('document_types.index') }}"
                     class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                     Voltar
                 </a>
@@ -21,7 +21,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form method="POST" action="{{ route('document-types.update', $documentType) }}">
+                    <form method="POST" action="{{ route('document_types.update', $documentType) }}">
                         @csrf
                         @method('PATCH')
 
@@ -110,7 +110,7 @@
                         </div>
 
                         <div class="mt-6 flex justify-end space-x-3">
-                            <a href="{{ route('document-types.show', $documentType) }}"
+                            <a href="{{ route('document_types.show', $documentType) }}"
                                 class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
                                 Cancelar
                             </a>

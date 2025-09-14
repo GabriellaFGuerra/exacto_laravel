@@ -5,11 +5,11 @@
                 {{ __('Tipo de Documento: ') }}{{ $documentType->name }}
             </h2>
             <div class="flex space-x-2">
-                <a href="{{ route('document-types.edit', $documentType) }}"
+                <a href="{{ route('document_types.edit', $documentType) }}"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Editar
                 </a>
-                <a href="{{ route('document-types.index') }}"
+                <a href="{{ route('document_types.index') }}"
                     class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                     Voltar
                 </a>
@@ -201,7 +201,7 @@
                     <div class="border-t border-gray-200 pt-6 mt-8">
                         <h3 class="text-lg font-medium text-gray-900 mb-4">Ações Rápidas</h3>
                         <div class="flex flex-wrap gap-2">
-                            <a href="{{ route('document-types.edit', $documentType) }}"
+                            <a href="{{ route('document_types.edit', $documentType) }}"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Editar Tipo
                             </a>

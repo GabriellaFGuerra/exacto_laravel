@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ __('Novo Tipo de Documento') }}
             </h2>
-            <a href="{{ route('document-types.index') }}"
+            <a href="{{ route('document_types.index') }}"
                 class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Voltar
             </a>
@@ -21,7 +21,7 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form method="POST" action="{{ route('document-types.store') }}">
+                    <form method="POST" action="{{ route('document_types.store') }}">
                         @csrf
 
                         <div class="grid grid-cols-1 gap-6 mb-6">
@@ -64,7 +64,7 @@
 
                         <!-- Botões -->
                         <div class="flex items-center justify-end space-x-3">
-                            <a href="{{ route('document-types.index') }}"
+                            <a href="{{ route('document_types.index') }}"
                                 class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
                                 Cancelar
                             </a>

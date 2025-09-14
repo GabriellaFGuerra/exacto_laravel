@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ __('Tipos de Documento') }}
             </h2>
-            <a href="{{ route('document-types.create') }}"
+            <a href="{{ route('document_types.create') }}"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Novo Tipo de Documento
             </a>
@@ -45,7 +45,7 @@
                                 class="w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
                                 Filtrar
                             </button>
-                            <a href="{{ route('document-types.index') }}"
+                            <a href="{{ route('document_types.index') }}"
                                 class="w-full text-center bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
                                 Limpar
                             </a>
@@ -105,12 +105,12 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex space-x-2">
-                                            <a href="{{ route('document-types.show', $documentType) }}"
+                                            <a href="{{ route('document_types.show', $documentType) }}"
                                                 class="text-blue-600 hover:text-blue-900">Ver</a>
-                                            <a href="{{ route('document-types.edit', $documentType) }}"
+                                            <a href="{{ route('document_types.edit', $documentType) }}"
                                                 class="text-indigo-600 hover:text-indigo-900">Editar</a>
                                             <form method="POST"
-                                                action="{{ route('document-types.destroy', $documentType) }}" class="inline"
+                                                action="{{ route('document_types.destroy', $documentType) }}" class="inline"
                                                 onsubmit="return confirm('Tem certeza que deseja excluir este tipo de documento?')">
                                                 @csrf
                                                 @method('DELETE')
