@@ -12,7 +12,7 @@ class ServiceTypeController extends Controller
      */
     public function index()
     {
-        $service_types = ServiceType::all();
+        $service_types = ServiceType::paginate(10);
         return view('service_types.index', compact('service_types'));
     }
 
@@ -31,19 +31,10 @@ class ServiceTypeController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
         ]);
 
         ServiceType::create($request->all());
         return redirect()->route('service_types.index')->with('success', 'Service Type created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(ServiceType $service_type)
-    {
-        return view('service_types.show', compact('service_type'));
     }
 
     /**
@@ -61,7 +52,6 @@ class ServiceTypeController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
         ]);
 
         $service_type->update($request->all());

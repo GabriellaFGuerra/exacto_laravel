@@ -30,40 +30,45 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// Rotas compartilhadas para usuários autenticados
+Route::middleware(['auth'])->group(function () {
+    // Adicionar 'active' como middleware em rotas que necessitam verificar se o usuário está ativo
+    Route::middleware(['active'])->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Budget routes
+        // Documento - acesso para admin e customer
+        Route::get('documents', [DocumentController::class, 'index'])->name('documents.index');
+        Route::get('documents/{document}', [DocumentController::class, 'show'])->name('documents.show');
+    });
+});
+
+// Rotas exclusivas para administradores
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Budget routes para admin
     Route::resource('budgets', BudgetController::class);
-    Route::get('customer/budgets', [BudgetController::class, 'customerBudgets'])->name('customer.budgets');
     Route::get('budgets/{budget}/download/{fileIndex}', [BudgetController::class, 'downloadFile'])->name('budgets.download');
     Route::get('budgets/{budget}/provider/{provider}/download', [BudgetController::class, 'downloadProviderFile'])->name('budgets.provider.download');
     Route::post('budgets/{budget}/providers', [BudgetController::class, 'addProvider'])->name('budgets.providers.add');
     Route::put('budgets/{budget}/providers/{budgetProvider}', [BudgetController::class, 'updateProvider'])->name('budgets.providers.update');
     Route::delete('budgets/{budget}/providers/{budgetProvider}', [BudgetController::class, 'removeProvider'])->name('budgets.providers.remove');
 
-    // Customer routes
+    // Rotas administrativas
     Route::resource('customers', CustomerController::class);
-
-    // Infraction routes
     Route::resource('infractions', InfractionController::class);
-
-    // Document routes
-    Route::resource('documents', DocumentController::class);
-
-    // Provider routes
+    Route::resource('documents', DocumentController::class)->except(['index', 'show']);
     Route::resource('providers', ProviderController::class);
-
-    // Service Type routes
     Route::resource('service-types', ServiceTypeController::class)->names('service_types');
-
-    // Document Type routes
     Route::resource('document-types', DocumentTypeController::class)->names('document_types');
-
-    // Manager routes
     Route::resource('managers', ManagerController::class);
+});
+
+// Rotas exclusivas para clientes
+Route::middleware(['auth', 'customer'])->group(function () {
+    Route::middleware(['active'])->group(function () {
+        Route::get('customer/budgets', [BudgetController::class, 'customerBudgets'])->name('customer.budgets');
+    });
 });
 
 require __DIR__ . '/auth.php';

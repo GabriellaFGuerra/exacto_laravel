@@ -19,7 +19,9 @@ class MunicipalitiesSeeder extends Seeder
             foreach ($estado['cidades'] as $cidade) {
                 $cidades[] = [
                     'name' => $cidade,
-                    'uf_id' => $id,
+                    'federative_unit_id' => $id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
             }
         }

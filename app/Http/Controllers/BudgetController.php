@@ -23,7 +23,7 @@ class BudgetController extends Controller
             $budgets = Budget::where('responsible_user_id', auth()->user()->id)
                 ->with(['customer', 'serviceType', 'responsibleManager'])
                 ->orderBy('created_at', 'desc')
-                ->get();
+                ->paginate(10);
             return view('budgets.index', compact('budgets'));
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Falha ao carregar os orçamentos: ' . $e->getMessage()]);
@@ -582,7 +582,7 @@ class BudgetController extends Controller
             $budgets = Budget::where('customer_id', auth()->user()->id)
                 ->with(['serviceType', 'responsibleUser', 'responsibleManager'])
                 ->orderBy('created_at', 'desc')
-                ->get();
+                ->paginate(10);
 
             return view('budgets.customer', compact('budgets'));
         } catch (\Exception $e) {

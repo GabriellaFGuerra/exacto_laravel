@@ -18,7 +18,7 @@ class MunicipalityFactory extends Factory
     {
         return [
             'name' => fake()->city(),
-            'federative_unit_id' => null, // Will be set by relationships or tests
+            'uf_id' => null, // Will be set by relationships or tests
             'code' => fake()->unique()->numerify('#####'),
         ];
     }

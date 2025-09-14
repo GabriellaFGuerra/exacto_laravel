@@ -13,7 +13,7 @@ class ManagerController extends Controller
     public function index()
     {
         try {
-            $managers = Manager::all();
+            $managers = Manager::paginate(10);
             return view('managers.index', compact('managers'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Falha ao recuperar gestores: ' . $e->getMessage());

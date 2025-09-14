@@ -17,12 +17,12 @@ class InfractionController extends Controller
             if (auth()->user()->user_type === 'admin') {
                 $infractions = Infraction::with(['customer', 'appeals'])
                     ->orderBy('created_at', 'desc')
-                    ->get();
+                    ->paginate(10);
             } else {
                 $infractions = Infraction::where('customer_id', auth()->user()->id)
                     ->with('appeals')
                     ->orderBy('created_at', 'desc')
-                    ->get();
+                    ->paginate(10);
             }
 
             return view('infractions.index', compact('infractions'));

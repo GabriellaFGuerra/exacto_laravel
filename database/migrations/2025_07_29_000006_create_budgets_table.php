@@ -13,8 +13,8 @@ class CreateBudgetsTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('service_type_id')->nullable();
             $table->string('custom_service_type', 255)->nullable();
-            $table->string('spreadsheet', 255)->nullable();
-            $table->text('progress')->nullable();
+            $table->json('spreadsheets')->nullable();
+            $table->integer('progress')->nullable()->default(0);
             $table->text('observation')->nullable();
             $table->date('approval_date')->nullable();
             $table->unsignedBigInteger('responsible_user_id')->nullable();

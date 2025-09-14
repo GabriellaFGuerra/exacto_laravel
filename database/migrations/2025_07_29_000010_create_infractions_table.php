@@ -25,6 +25,7 @@ class CreateInfractionsTable extends Migration
             $table->longText('article_description')->nullable();
             $table->longText('notification_description')->nullable();
             $table->string('receipt', 255)->nullable();
+            $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('set null');
         });

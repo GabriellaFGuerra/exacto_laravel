@@ -11,10 +11,12 @@ class CreateMunicipalitiesTable extends Migration
         Schema::create('municipalities', function (Blueprint $table) {
             $table->id();
             $table->string('name', 200);
-            $table->unsignedBigInteger('uf_id');
+            $table->unsignedBigInteger('federative_unit_id');
+            $table->string('code')->nullable();
+            $table->timestamps();
 
-            $table->foreign('uf_id')->references('id')->on('federative_units')->onDelete('cascade');
-            $table->unique(['name', 'uf_id']); // Evita cidades duplicadas no mesmo estado
+            $table->foreign('federative_unit_id')->references('id')->on('federative_units')->onDelete('cascade');
+            $table->unique(['name', 'federative_unit_id']); // Evita cidades duplicadas no mesmo estado
         });
     }
 

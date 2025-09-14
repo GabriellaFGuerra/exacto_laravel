@@ -14,7 +14,7 @@ class AdminController extends Controller
     public function index()
     {
         try {
-            $users = User::where('user_type', 'admin')->get();
+            $users = User::where('user_type', 'admin')->paginate(10);
             return view('admin.index', compact('users'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Falha ao recuperar usuários: ' . $e->getMessage());

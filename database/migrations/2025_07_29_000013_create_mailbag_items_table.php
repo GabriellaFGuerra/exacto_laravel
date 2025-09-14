@@ -19,6 +19,7 @@ class CreateMailbagItemsTable extends Migration
             $table->tinyInteger('closed')->nullable();
             $table->dateTime('close_date')->nullable();
             $table->string('observation', 255)->nullable();
+            $table->timestamps();
 
             $table->foreign('mailbag_id')->references('id')->on('mailbags')->onDelete('set null');
         });

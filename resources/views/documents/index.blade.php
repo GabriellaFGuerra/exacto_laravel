@@ -72,130 +72,90 @@
             </div>
 
             <!-- Lista de Documentos -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    ID</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nome</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Tipo</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Cliente</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Orçamento</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Infração</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Data</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Status</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($documents as $document)
-                                                    <tr>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $document->id }}</td>
-                                                        <td class="px-6 py-4 whitespace-nowrap">
-                                                            <div class="text-sm font-medium text-gray-900">{{ $document->name ?? 'Documento' }}
-                                                            </div>
-                                                            @if($document->description)
-                                                                <div class="text-sm text-gray-500">{{ Str::limit($document->description, 30) }}
-                                                                </div>
-                                                            @endif
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                            {{ $document->documentType->name ?? 'N/A' }}
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap">
-                                                            <div class="text-sm font-medium text-gray-900">{{ $document->user->name ?? 'N/A' }}
-                                                            </div>
-                                                            <div class="text-sm text-gray-500">{{ $document->user->email ?? 'N/A' }}</div>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                            @if($document->budget)
-                                                                <a href="{{ route('budgets.show', $document->budget) }}"
-                                                                    class="text-blue-600 hover:text-blue-900">
-                                                                    #{{ $document->budget->id }}
-                                                                </a>
-                                                            @else
-                                                                N/A
-                                                            @endif
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                            @if($document->infraction)
-                                                                <a href="{{ route('infractions.show', $document->infraction) }}"
-                                                                    class="text-blue-600 hover:text-blue-900">
-                                                                    #{{ $document->infraction->id }}
-                                                                </a>
-                                                            @else
-                                                                N/A
-                                                            @endif
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                            {{ $document->created_at->format('d/m/Y H:i') }}
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap">
-                                                            <span
-                                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                                                    {{ $document->status == 'approved' ? 'bg-green-100 text-green-800' :
-                                ($document->status == 'rejected' ? 'bg-red-100 text-red-800' :
-                                    ($document->status == 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800')) }}">
-                                                                {{ ucfirst($document->status ?? 'pending') }}
-                                                            </span>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                            <div class="flex space-x-2">
-                                                                @if($document->file_path)
-                                                                    <a href="{{ asset('storage/' . $document->file_path) }}" target="_blank"
-                                                                        class="text-green-600 hover:text-green-900">Baixar</a>
-                                                                @endif
-                                                                <a href="{{ route('documents.show', $document) }}"
-                                                                    class="text-blue-600 hover:text-blue-900">Ver</a>
-                                                                <a href="{{ route('documents.edit', $document) }}"
-                                                                    class="text-indigo-600 hover:text-indigo-900">Editar</a>
-                                                                <form method="POST" action="{{ route('documents.destroy', $document) }}"
-                                                                    class="inline"
-                                                                    onsubmit="return confirm('Tem certeza que deseja excluir este documento?')">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit"
-                                                                        class="text-red-600 hover:text-red-900">Excluir</button>
-                                                                </form>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="9" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                                        Nenhum documento encontrado.
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-
-                @if($documents instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                    <div class="px-6 py-4 bg-white border-t border-gray-200">
-                        {{ $documents->appends(request()->query())->links() }}
-                    </div>
-                @endif
-            </div>
+            <x-exacto-table>
+                <x-slot name="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Cliente</th>
+                        <th>Orçamento</th>
+                        <th>Infração</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </x-slot>
+                
+                <x-slot name="body">
+                    @forelse($documents as $document)
+                    <tr>
+                        <td>{{ $document->id }}</td>
+                        <td>
+                            <div>{{ $document->name ?? 'Documento' }}</div>
+                            @if($document->description)
+                            <div class="text-gray-500">{{ Str::limit($document->description, 30) }}</div>
+                            @endif
+                        </td>
+                        <td>{{ $document->documentType->name ?? 'N/A' }}</td>
+                        <td>
+                            <div>{{ $document->user->name ?? 'N/A' }}</div>
+                            <div class="text-gray-500">{{ $document->user->email ?? 'N/A' }}</div>
+                        </td>
+                        <td>
+                            @if($document->budget)
+                            <a href="{{ route('budgets.show', $document->budget) }}" class="text-primary hover:text-primary-dark">
+                                #{{ $document->budget->id }}
+                            </a>
+                            @else
+                            N/A
+                            @endif
+                        </td>
+                        <td>
+                            @if($document->infraction)
+                            <a href="{{ route('infractions.show', $document->infraction) }}" class="text-primary hover:text-primary-dark">
+                                #{{ $document->infraction->id }}
+                            </a>
+                            @else
+                            N/A
+                            @endif
+                        </td>
+                        <td>{{ $document->created_at->format('d/m/Y H:i') }}</td>
+                        <td>
+                            <span class="status-badge 
+                                {{ $document->status == 'approved' ? 'status-success' : 
+                                   ($document->status == 'rejected' ? 'status-danger' : 
+                                    ($document->status == 'pending' ? 'status-warning' : 'status-default')) }}">
+                                {{ ucfirst($document->status ?? 'pending') }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="flex space-x-2">
+                                @if($document->file_path)
+                                <a href="{{ asset('storage/' . $document->file_path) }}" target="_blank" class="action-link download">Baixar</a>
+                                @endif
+                                <a href="{{ route('documents.show', $document) }}" class="action-link view">Ver</a>
+                                <a href="{{ route('documents.edit', $document) }}" class="action-link edit">Editar</a>
+                                <form method="POST" action="{{ route('documents.destroy', $document) }}" class="inline"
+                                    onsubmit="return confirm('Tem certeza que deseja excluir este documento?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="action-link delete">Excluir</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="9" class="text-center">Nenhum documento encontrado.</td>
+                    </tr>
+                    @endforelse
+                </x-slot>
+                
+                <x-slot name="pagination">
+                    {{ $documents->appends(request()->query())->links('pagination.exacto') }}
+                </x-slot>
+            </x-exacto-table>
         </div>
     </div>
 </x-app-layout>

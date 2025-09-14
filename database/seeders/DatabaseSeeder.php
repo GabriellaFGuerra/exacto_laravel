@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             FederativeUnitsSeeder::class,
             MunicipalitiesSeeder::class,
             DataMigrationSeeder::class,
+            ServiceTypeSeeder::class,
         ]);
     }
 }

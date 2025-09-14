@@ -20,7 +20,7 @@ class Budget extends Model
         'customer_id',
         'service_type_id',
         'custom_service_type',
-        'spreadsheet',
+        'spreadsheets',
         'progress',
         'observation',
         'approval_date',
@@ -38,6 +38,7 @@ class Budget extends Model
     protected $casts = [
         'approval_date' => 'date',
         'deadline' => 'date',
+        'spreadsheets' => 'array',
     ];
 
     /**

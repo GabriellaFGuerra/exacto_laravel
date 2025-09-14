@@ -15,6 +15,7 @@ class CreateAppealsTable extends Migration
             $table->longText('description')->nullable();
             $table->string('appeal', 255)->nullable();
             $table->string('status', 20)->nullable();
+            $table->timestamps();
 
             $table->foreign('infraction_id')->references('id')->on('infractions')->onDelete('set null');
         });

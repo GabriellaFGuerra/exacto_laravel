@@ -38,10 +38,16 @@ class EnsureUserIsActive
      */
     private function unauthorized($request)
     {
-        // Faz logout e invalida a sessão
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        // Verifica se o usuário está autenticado antes de fazer logout
+        if (Auth::check()) {
+            Auth::logout();
+
+            // Verifica se a sessão está disponível antes de tentar usá-la
+            if ($request->hasSession()) {
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+            }
+        }
 
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Conta inativa. Por favor, contate o administrador.'], 403);

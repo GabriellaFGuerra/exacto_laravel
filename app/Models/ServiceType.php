@@ -17,16 +17,6 @@ class ServiceType extends Model
      */
     protected $fillable = [
         'name',
-        'status',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'status' => 'integer',
     ];
 
     /**

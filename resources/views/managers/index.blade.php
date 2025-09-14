@@ -55,86 +55,58 @@
             </div>
 
             <!-- Lista de Gerentes -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    ID</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nome</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Contato</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Orçamentos Gerenciados</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Status</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($managers as $manager)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $manager->id }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">{{ $manager->name }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{ $manager->email ?? 'N/A' }}</div>
-                                        <div class="text-sm text-gray-500">{{ $manager->phone ?? 'N/A' }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        {{ $manager->budgets->count() }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                                {{ $manager->status ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                            {{ $manager->status ? 'Ativo' : 'Inativo' }}
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <div class="flex space-x-2">
-                                            <a href="{{ route('managers.show', $manager) }}"
-                                                class="text-blue-600 hover:text-blue-900">Ver</a>
-                                            <a href="{{ route('managers.edit', $manager) }}"
-                                                class="text-indigo-600 hover:text-indigo-900">Editar</a>
-                                            <form method="POST" action="{{ route('managers.destroy', $manager) }}"
-                                                class="inline"
-                                                onsubmit="return confirm('Tem certeza que deseja excluir este gerente?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="text-red-600 hover:text-red-900">Excluir</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                                        Nenhum gerente encontrado.
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-
-                @if($managers instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                    <div class="px-6 py-4 bg-white border-t border-gray-200">
-                        {{ $managers->appends(request()->query())->links() }}
-                    </div>
-                @endif
-            </div>
+            <x-exacto-table>
+                <x-slot name="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Contato</th>
+                        <th>Orçamentos Gerenciados</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </x-slot>
+                
+                <x-slot name="body">
+                    @forelse($managers as $manager)
+                        <tr>
+                            <td>{{ $manager->id }}</td>
+                            <td>{{ $manager->name }}</td>
+                            <td>
+                                <div>{{ $manager->email ?? 'N/A' }}</div>
+                                <div class="text-gray-500">{{ $manager->phone ?? 'N/A' }}</div>
+                            </td>
+                            <td>{{ $manager->budgets->count() }}</td>
+                            <td>
+                                <span class="status-badge {{ $manager->status ? 'status-active' : 'status-inactive' }}">
+                                    {{ $manager->status ? 'Ativo' : 'Inativo' }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="flex space-x-2">
+                                    <a href="{{ route('managers.show', $manager) }}" class="action-link view">Ver</a>
+                                    <a href="{{ route('managers.edit', $manager) }}" class="action-link edit">Editar</a>
+                                    <form method="POST" action="{{ route('managers.destroy', $manager) }}"
+                                        class="inline"
+                                        onsubmit="return confirm('Tem certeza que deseja excluir este gerente?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="action-link delete">Excluir</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center">Nenhum gerente encontrado.</td>
+                        </tr>
+                    @endforelse
+                </x-slot>
+                
+                <x-slot name="pagination">
+                    {{ $managers->appends(request()->query())->links('pagination.exacto') }}
+                </x-slot>
+            </x-exacto-table>
         </div>
     </div>
 </x-app-layout>

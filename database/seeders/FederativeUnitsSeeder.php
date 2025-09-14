@@ -15,7 +15,7 @@ class FederativeUnitsSeeder extends Seeder
         foreach ($json['estados'] as $estado) {
             $estados[] = [
                 'name' => $estado['nome'],
-                'abbreviation' => $estado['sigla'],
+                'abbreviation' => $estado['sigla'], // Use abbreviation instead of acronym
             ];
         }
         DB::table('federative_units')->insert($estados);

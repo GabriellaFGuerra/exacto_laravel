@@ -1,0 +1,269 @@
+/* Estilos baseados no site testeexacto.com.br */
+
+:root {
+    --exacto-primary: #006cab; /* Azul principal da marca */
+    --exacto-secondary: #0088cc; /* Azul secundário */
+    --exacto-accent: #ff9900; /* Laranja para destaque */
+    --exacto-text: #333333; /* Texto escuro */
+    --exacto-light-bg: #f7f7f7; /* Background claro */
+    --exacto-border: #dddddd; /* Borda cinza */
+}
+
+/* Estilo geral */
+body {
+    font-family: "Figtree", sans-serif;
+    color: var(--exacto-text);
+}
+
+/* Cabeçalho personalizado */
+.exacto-header {
+    background-color: var(--exacto-primary);
+    color: white;
+}
+
+/* Botões primários */
+.exacto-btn-primary {
+    background-color: var(--exacto-primary);
+    border-color: var(--exacto-primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.exacto-btn-primary:hover {
+    background-color: var(--exacto-secondary);
+}
+
+/* Botões secundários */
+.exacto-btn-secondary {
+    background-color: white;
+    border: 1px solid var(--exacto-border);
+    color: var(--exacto-text);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.exacto-btn-secondary:hover {
+    background-color: var(--exacto-light-bg);
+}
+
+/* Cards */
+.exacto-card {
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    overflow: hidden;
+}
+
+/* Tabelas */
+.exacto-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 1rem;
+}
+
+.exacto-table thead th {
+    background-color: var(--exacto-primary);
+    color: white;
+    padding: 0.75rem;
+    font-weight: 600;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.exacto-table tbody td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--exacto-border);
+}
+
+.exacto-table tbody tr:nth-child(even) {
+    background-color: var(--exacto-light-bg);
+}
+
+.exacto-table tbody tr:hover {
+    background-color: rgba(0, 108, 171, 0.05);
+}
+
+/* Links na tabela */
+.exacto-table .action-link {
+    color: var(--exacto-primary);
+    margin-right: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.exacto-table .action-link:hover {
+    color: var(--exacto-secondary);
+    text-decoration: underline;
+}
+
+.exacto-table .delete-link {
+    color: #dc3545;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.exacto-table .delete-link:hover {
+    color: #c82333;
+    text-decoration: underline;
+}
+
+/* Paginação */
+.exacto-pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 1rem 0;
+    margin-top: 1rem;
+}
+
+.exacto-pagination .page-item {
+    margin: 0 0.25rem;
+}
+
+.exacto-pagination .page-link {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--exacto-border);
+    color: var(--exacto-text);
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+
+.exacto-pagination .page-item.active .page-link {
+    background-color: var(--exacto-primary);
+    border-color: var(--exacto-primary);
+    color: white;
+}
+
+.exacto-pagination .page-link:hover {
+    background-color: var(--exacto-light-bg);
+}
+
+.exacto-pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: var(--exacto-border);
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.status-active {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-inactive {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.status-warning {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+.status-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-danger {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.status-info {
+    background-color: #cff4fc;
+    color: #055160;
+}
+
+.status-default {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+/* Links de ação */
+.action-link {
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    font: inherit;
+}
+
+.action-link.view {
+    color: var(--exacto-primary);
+}
+
+.action-link.edit {
+    color: #6366f1;
+}
+
+.action-link.delete {
+    color: #dc2626;
+}
+
+.action-link.download {
+    color: #059669;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}
+
+/* Mensagens de alerta */
+.exacto-alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+}
+
+.exacto-alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.exacto-alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Logo */
+.exacto-logo {
+    height: 40px;
+}
+
+/* Footer */
+.exacto-footer {
+    background-color: var(--exacto-primary);
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 0.875rem;
+}

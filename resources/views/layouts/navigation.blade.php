@@ -15,6 +15,39 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    
+                    @if(Auth::user() && Auth::user()->isAdmin())
+                        <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
+                            {{ __('Clientes') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('providers.index')" :active="request()->routeIs('providers.*')">
+                            {{ __('Fornecedores') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('budgets.index')" :active="request()->routeIs('budgets.*')">
+                            {{ __('Orçamentos') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('infractions.index')" :active="request()->routeIs('infractions.*')">
+                            {{ __('Infrações') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('documents.index')" :active="request()->routeIs('documents.*')">
+                            {{ __('Documentos') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('service_types.index')" :active="request()->routeIs('service_types.*')">
+                            {{ __('Tipos de Serviço') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('document_types.index')" :active="request()->routeIs('document_types.*')">
+                            {{ __('Tipos de Documento') }}
+                        </x-nav-link>
+                    @endif
+                    
+                    @if(Auth::user() && Auth::user()->isCustomer())
+                        <x-nav-link :href="route('customer.budgets')" :active="request()->routeIs('customer.budgets')">
+                            {{ __('Meus Orçamentos') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('documents.index')" :active="request()->routeIs('documents.*')">
+                            {{ __('Meus Documentos') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,6 +103,39 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            
+            @if(Auth::user() && Auth::user()->isAdmin())
+                <x-responsive-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
+                    {{ __('Clientes') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('providers.index')" :active="request()->routeIs('providers.*')">
+                    {{ __('Fornecedores') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('budgets.index')" :active="request()->routeIs('budgets.*')">
+                    {{ __('Orçamentos') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('infractions.index')" :active="request()->routeIs('infractions.*')">
+                    {{ __('Infrações') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('documents.index')" :active="request()->routeIs('documents.*')">
+                    {{ __('Documentos') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('service_types.index')" :active="request()->routeIs('service_types.*')">
+                    {{ __('Tipos de Serviço') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('document_types.index')" :active="request()->routeIs('document_types.*')">
+                    {{ __('Tipos de Documento') }}
+                </x-responsive-nav-link>
+            @endif
+            
+            @if(Auth::user() && Auth::user()->isCustomer())
+                <x-responsive-nav-link :href="route('customer.budgets')" :active="request()->routeIs('customer.budgets')">
+                    {{ __('Meus Orçamentos') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('documents.index')" :active="request()->routeIs('documents.*')">
+                    {{ __('Meus Documentos') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

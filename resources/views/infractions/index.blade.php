@@ -66,105 +66,68 @@
             </div>
 
             <!-- Lista de Infrações -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    ID</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Cliente</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Tipo</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Cidade</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Data</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Placa</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Valor</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Status</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($infractions as $infraction)
-                                                    <tr>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $infraction->id }}</td>
-                                                        <td class="px-6 py-4 whitespace-nowrap">
-                                                            <div class="text-sm font-medium text-gray-900">
-                                                                {{ $infraction->user->name ?? 'N/A' }}</div>
-                                                            <div class="text-sm text-gray-500">{{ $infraction->user->email ?? 'N/A' }}</div>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                            {{ $infraction->type ?? 'N/A' }}</td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                            {{ $infraction->city ?? 'N/A' }}</td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                            {{ $infraction->date ? $infraction->date->format('d/m/Y') : 'N/A' }}
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                            {{ $infraction->license_plate ?? 'N/A' }}</td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                            R$ {{ number_format($infraction->amount ?? 0, 2, ',', '.') }}
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap">
-                                                            <span
-                                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                                                    {{ $infraction->status == 'active' ? 'bg-yellow-100 text-yellow-800' :
-                                ($infraction->status == 'paid' ? 'bg-green-100 text-green-800' :
-                                    ($infraction->status == 'appealed' ? 'bg-blue-100 text-blue-800' :
-                                        ($infraction->status == 'cancelled' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800'))) }}">
-                                                                {{ ucfirst($infraction->status ?? 'pending') }}
-                                                            </span>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                            <div class="flex space-x-2">
-                                                                <a href="{{ route('infractions.show', $infraction) }}"
-                                                                    class="text-blue-600 hover:text-blue-900">Ver</a>
-                                                                <a href="{{ route('infractions.edit', $infraction) }}"
-                                                                    class="text-indigo-600 hover:text-indigo-900">Editar</a>
-                                                                <form method="POST" action="{{ route('infractions.destroy', $infraction) }}"
-                                                                    class="inline"
-                                                                    onsubmit="return confirm('Tem certeza que deseja excluir esta infração?')">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit"
-                                                                        class="text-red-600 hover:text-red-900">Excluir</button>
-                                                                </form>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="9" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                                        Nenhuma infração encontrada.
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-
-                @if($infractions instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                    <div class="px-6 py-4 bg-white border-t border-gray-200">
-                        {{ $infractions->appends(request()->query())->links() }}
-                    </div>
-                @endif
-            </div>
+            <x-exacto-table>
+                <x-slot name="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Tipo</th>
+                        <th>Cidade</th>
+                        <th>Data</th>
+                        <th>Placa</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </x-slot>
+                
+                <x-slot name="body">
+                    @forelse($infractions as $infraction)
+                        <tr>
+                            <td>{{ $infraction->id }}</td>
+                            <td>
+                                <div>{{ $infraction->user->name ?? 'N/A' }}</div>
+                                <div class="text-gray-500">{{ $infraction->user->email ?? 'N/A' }}</div>
+                            </td>
+                            <td>{{ $infraction->type ?? 'N/A' }}</td>
+                            <td>{{ $infraction->city ?? 'N/A' }}</td>
+                            <td>{{ $infraction->date ? $infraction->date->format('d/m/Y') : 'N/A' }}</td>
+                            <td>{{ $infraction->license_plate ?? 'N/A' }}</td>
+                            <td>R$ {{ number_format($infraction->amount ?? 0, 2, ',', '.') }}</td>
+                            <td>
+                                <span class="status-badge 
+                                    {{ $infraction->status == 'active' ? 'status-warning' : 
+                                       ($infraction->status == 'paid' ? 'status-success' : 
+                                        ($infraction->status == 'appealed' ? 'status-info' : 
+                                         ($infraction->status == 'cancelled' ? 'status-danger' : 'status-default'))) }}">
+                                    {{ ucfirst($infraction->status ?? 'pending') }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="flex space-x-2">
+                                    <a href="{{ route('infractions.show', $infraction) }}" class="action-link view">Ver</a>
+                                    <a href="{{ route('infractions.edit', $infraction) }}" class="action-link edit">Editar</a>
+                                    <form method="POST" action="{{ route('infractions.destroy', $infraction) }}"
+                                        class="inline"
+                                        onsubmit="return confirm('Tem certeza que deseja excluir esta infração?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="action-link delete">Excluir</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="9" class="text-center">Nenhuma infração encontrada.</td>
+                        </tr>
+                    @endforelse
+                </x-slot>
+                
+                <x-slot name="pagination">
+                    {{ $infractions->appends(request()->query())->links('pagination.exacto') }}
+                </x-slot>
+            </x-exacto-table>
         </div>
     </div>
 </x-app-layout>

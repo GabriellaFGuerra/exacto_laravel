@@ -7,14 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use App\Models\DocumentType;
+use App\Models\User;
 
 class DocumentController extends Controller
 {
     public function index()
     {
         try {
-            $documents = Document::all();
-            return view('documents.index', compact('documents'));
+            $documents = Document::paginate(10);
+            $documentTypes = DocumentType::all();
+            $users = User::where('user_type', 'customer')->get();
+            return view('documents.index', compact('documents', 'documentTypes', 'users'));
         } catch (\Exception $e) {
             Log::error('Erro ao buscar documentos: ' . $e->getMessage());
             return redirect()->back()->withErrors('Falha ao carregar os documentos.');
