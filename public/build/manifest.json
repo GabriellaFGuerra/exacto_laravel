@@ -1,0 +1,17 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-f2ea397b.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/css/exacto.css": {
+    "file": "assets/exacto-5d898771.css",
+    "isEntry": true,
+    "src": "resources/css/exacto.css"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-195a6607.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
