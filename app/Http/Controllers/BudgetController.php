@@ -37,7 +37,7 @@ class BudgetController extends Controller
     {
         try {
             $customers = User::where('user_type', 'customer')->where('status', 1)->get();
-            $serviceTypes = ServiceType::where('status', 1)->get();
+            $serviceTypes = ServiceType::all();
             $responsibleUsers = User::where('user_type', 'admin')->where('status', 1)->get();
             $managers = Manager::all();
             $providers = Provider::where('deleted_at', null)->get();
